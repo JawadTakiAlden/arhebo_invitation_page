@@ -74,8 +74,6 @@ const InviteCard = () => {
     );
   }
 
-  console.log(query.data.data);
-
   return (
     <main className="h-screen w-full">
       <div className="w-full mb-2">
@@ -83,7 +81,9 @@ const InviteCard = () => {
           <div className="flex-row flex-1 h-screen">
             <div className="flex h-full p-1 items-center justify-center">
               <img
-                src={query.data.data.template}
+                src={query.data.data.template || (
+                  <span className="text-red-400">undefined</span>
+                )}
                 alt="invitaion"
                 className="max-w-full max-h-[600px]"
               />
@@ -93,12 +93,16 @@ const InviteCard = () => {
             <div className="flex items-center justify-center flex-col h-full px-2">
               <div className="mb-6">
                 <p className="text-center capitalize text-[28px]">
-                  {query.data.data.category}
+                  {query.data.data.category || (
+                    <span className="text-red-400">undefined</span>
+                  )}
                 </p>
               </div>
               <div className="flex items-center w-full">
                 <p className="flex-row flex-1 text-center px-6 py-2 bg-[#F9F9F9] text-[20px] rounded-tl-[12px]">
-                  {query.data.data.event_name}
+                  {query.data.data.event_name || (
+                    <span className="text-red-400">undefined</span>
+                  )}
                 </p>
                 <p className="flex-row flex-1  px-6 py-2 bg-[#4AB3541A] text-center text-[20px] rounded-tr-[12px]">
                   اسم المناسبة
@@ -106,7 +110,9 @@ const InviteCard = () => {
               </div>
               <div className="flex items-center w-full">
                 <p className="flex-row flex-1 text-center px-6 py-2 bg-[#F9F9F9] text-[20px] ">
-                  {query.data.data.inviter}
+                  {query.data.data.inviter || (
+                    <span className="text-red-400">undefined</span>
+                  )}
                 </p>
                 <p className="flex-row flex-1  px-6 py-2 bg-[#4AB3541A] text-center text-[20px]">
                   اسم الداعي
@@ -114,7 +120,9 @@ const InviteCard = () => {
               </div>
               <div className="flex items-center w-full">
                 <p className="flex-row flex-1 text-center px-6 py-2 bg-[#F9F9F9] text-[20px] ">
-                  {query.data.data.miladi_date}
+                  {query.data.data.miladi_date || (
+                    <span className="text-red-400">undefined</span>
+                  )}
                 </p>
                 <p className="flex-row flex-1  px-6 py-2 bg-[#4AB3541A] text-center text-[20px] ">
                   التاريخ الميلادي
@@ -122,7 +130,9 @@ const InviteCard = () => {
               </div>
               <div className="flex items-center w-full">
                 <p className="flex-row flex-1 text-center px-6 py-2 bg-[#F9F9F9] text-[20px] ">
-                  {query.data.data.hijri_date}
+                  {query.data.data.hijri_date || (
+                    <span className="text-red-400">undefined</span>
+                  )}
                 </p>
                 <p className="flex-row flex-1  px-6 py-2 bg-[#4AB3541A] text-center text-[20px]">
                   التاريخ الهجري
@@ -130,7 +140,9 @@ const InviteCard = () => {
               </div>
               <div className="flex items-center w-full">
                 <p className="flex-row flex-1 text-center px-6 py-2 bg-[#F9F9F9] text-[20px]">
-                  {query.data.data.location_link}
+                  {query.data.data.location_link || (
+                    <span className="text-red-400">undefined</span>
+                  )}
                 </p>
                 <p className="flex-row flex-1  px-6 py-2 bg-[#4AB3541A] text-center text-[20px] ">
                   رابط الموقع
@@ -138,7 +150,9 @@ const InviteCard = () => {
               </div>
               <div className="flex items-center w-full">
                 <p className="flex-row flex-1 text-center px-6 py-2 bg-[#F9F9F9] text-[20px] ">
-                  {query.data.data.city}
+                  {query.data.data.city || (
+                    <span className="text-red-400">undefined</span>
+                  )}
                 </p>
                 <p className="flex-row flex-1  px-6 py-2 bg-[#4AB3541A] text-center text-[20px]">
                   المدينة
@@ -147,7 +161,7 @@ const InviteCard = () => {
               <div className="flex items-center w-full">
                 <p className="flex-row flex-1 text-center px-6 py-2 bg-[#F9F9F9] text-[20px]">
                   {query.data.data.region || (
-                    <span className="text-red-400">unlocated</span>
+                    <span className="text-red-400">undefined</span>
                   )}
                 </p>
                 <p className="flex-row flex-1  px-6 py-2 bg-[#4AB3541A] text-center text-[20px] ">
@@ -156,7 +170,9 @@ const InviteCard = () => {
               </div>
               <div className="flex items-center w-full">
                 <p className="flex-row flex-1 text-center px-6 py-2 bg-[#F9F9F9] text-[20px] rounded-bl-[12px]">
-                  {query.data.data.location_name}
+                  {query.data.data.location_name || (
+                    <span className="text-red-400">undefined</span>
+                  )}
                 </p>
                 <p className="flex-row flex-1  px-6 py-2 bg-[#4AB3541A] text-center text-[20px] rounded-br-[12px]">
                   الموقع

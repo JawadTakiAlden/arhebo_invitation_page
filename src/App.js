@@ -14,7 +14,7 @@ const App = () => {
   return (
     <Routes>
       <Route path='/' element={<RedirctFromHome/>} /> 
-      <Route path='/invitaion-card/:invite' element={<InviteCard />} />
+      <Route path='/invitation-card/:invite' element={<InviteCard />} />
     </Routes>
   )
 }
