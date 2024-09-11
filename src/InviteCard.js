@@ -81,9 +81,11 @@ const InviteCard = () => {
           <div className="flex-row flex-1 h-screen">
             <div className="flex h-full p-1 items-center justify-center">
               <img
-                src={query.data.data.template || (
-                  <span className="text-red-400">undefined</span>
-                )}
+                src={
+                  query.data.data.template || (
+                    <span className="text-red-400">...</span>
+                  )
+                }
                 alt="invitaion"
                 className="max-w-full max-h-[600px]"
               />
@@ -94,14 +96,14 @@ const InviteCard = () => {
               <div className="mb-6">
                 <p className="text-center capitalize text-[28px]">
                   {query.data.data.category || (
-                    <span className="text-red-400">undefined</span>
+                    <span className="text-red-400">...</span>
                   )}
                 </p>
               </div>
               <div className="flex items-center w-full">
                 <p className="flex-row flex-1 text-center px-6 py-2 bg-[#F9F9F9] text-[20px] rounded-tl-[12px]">
                   {query.data.data.event_name || (
-                    <span className="text-red-400">undefined</span>
+                    <span className="text-red-400">...</span>
                   )}
                 </p>
                 <p className="flex-row flex-1  px-6 py-2 bg-[#4AB3541A] text-center text-[20px] rounded-tr-[12px]">
@@ -111,7 +113,7 @@ const InviteCard = () => {
               <div className="flex items-center w-full">
                 <p className="flex-row flex-1 text-center px-6 py-2 bg-[#F9F9F9] text-[20px] ">
                   {query.data.data.inviter || (
-                    <span className="text-red-400">undefined</span>
+                    <span className="text-red-400">...</span>
                   )}
                 </p>
                 <p className="flex-row flex-1  px-6 py-2 bg-[#4AB3541A] text-center text-[20px]">
@@ -121,7 +123,7 @@ const InviteCard = () => {
               <div className="flex items-center w-full">
                 <p className="flex-row flex-1 text-center px-6 py-2 bg-[#F9F9F9] text-[20px] ">
                   {query.data.data.miladi_date || (
-                    <span className="text-red-400">undefined</span>
+                    <span className="text-red-400">...</span>
                   )}
                 </p>
                 <p className="flex-row flex-1  px-6 py-2 bg-[#4AB3541A] text-center text-[20px] ">
@@ -131,7 +133,7 @@ const InviteCard = () => {
               <div className="flex items-center w-full">
                 <p className="flex-row flex-1 text-center px-6 py-2 bg-[#F9F9F9] text-[20px] ">
                   {query.data.data.hijri_date || (
-                    <span className="text-red-400">undefined</span>
+                    <span className="text-red-400">...</span>
                   )}
                 </p>
                 <p className="flex-row flex-1  px-6 py-2 bg-[#4AB3541A] text-center text-[20px]">
@@ -140,9 +142,12 @@ const InviteCard = () => {
               </div>
               <div className="flex items-center w-full">
                 <p className="flex-row flex-1 text-center px-6 py-2 bg-[#F9F9F9] text-[20px]">
-                  {query.data.data.location_link || (
-                    <span className="text-red-400">undefined</span>
-                  )}
+                  <a
+                    href={query.data.data.location_link}
+                    className="py-1 px-3 bg-green-50 rounded-md"
+                  >
+                    location
+                  </a>
                 </p>
                 <p className="flex-row flex-1  px-6 py-2 bg-[#4AB3541A] text-center text-[20px] ">
                   رابط الموقع
@@ -151,7 +156,7 @@ const InviteCard = () => {
               <div className="flex items-center w-full">
                 <p className="flex-row flex-1 text-center px-6 py-2 bg-[#F9F9F9] text-[20px] ">
                   {query.data.data.city || (
-                    <span className="text-red-400">undefined</span>
+                    <span className="text-red-400">...</span>
                   )}
                 </p>
                 <p className="flex-row flex-1  px-6 py-2 bg-[#4AB3541A] text-center text-[20px]">
@@ -161,7 +166,7 @@ const InviteCard = () => {
               <div className="flex items-center w-full">
                 <p className="flex-row flex-1 text-center px-6 py-2 bg-[#F9F9F9] text-[20px]">
                   {query.data.data.region || (
-                    <span className="text-red-400">undefined</span>
+                    <span className="text-red-400">...</span>
                   )}
                 </p>
                 <p className="flex-row flex-1  px-6 py-2 bg-[#4AB3541A] text-center text-[20px] ">
@@ -171,7 +176,7 @@ const InviteCard = () => {
               <div className="flex items-center w-full">
                 <p className="flex-row flex-1 text-center px-6 py-2 bg-[#F9F9F9] text-[20px] rounded-bl-[12px]">
                   {query.data.data.location_name || (
-                    <span className="text-red-400">undefined</span>
+                    <span className="text-red-400">...</span>
                   )}
                 </p>
                 <p className="flex-row flex-1  px-6 py-2 bg-[#4AB3541A] text-center text-[20px] rounded-br-[12px]">
