@@ -54,6 +54,7 @@ const InviteCard = () => {
         url: `/showInvitationInfo/${invite}?uuid=${uuid}`,
       });
     },
+    refetchInterval : 500
   });
 
   if (query.isLoading) {
@@ -268,7 +269,10 @@ const InviteCard = () => {
                 <img
                   onClick={(e) => e.target.requestFullscreen()}
                   src={`https://api.dev1.gomaplus.tech${qr.qr_code}`}
-                  className="max-w-full"
+                  className={"max-w-full"}
+                  style={{
+                    filter : `${qr.status ? 'blur(5px)' : 'none'}`,
+                  }}
                 />
               );
             })
