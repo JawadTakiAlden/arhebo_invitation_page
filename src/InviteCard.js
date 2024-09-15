@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import InviteImage from "./Wedding Card 5  1.png";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { request } from "./request";
@@ -8,6 +8,7 @@ import { useSnackbar } from "notistack";
 const InviteCard = () => {
   const { invite } = useParams();
   const location = useLocation();
+  const [os , setOs] = useState('windows')
   const queryParams = new URLSearchParams(location.search);
   const [apolgizeText, setApolgizeText] = useState("");
   const [controller, setController] = useState({
@@ -16,6 +17,20 @@ const InviteCard = () => {
   });
   const { enqueueSnackbar } = useSnackbar();
   const uuid = queryParams.get("uuid");
+
+  useEffect(() => {
+    const getOS = () => {
+      const platform = navigator.platform.toLowerCase();
+      if (platform.includes('win')) return 'Windows';
+      if (platform.includes('mac')) return 'MacOS';
+      if (platform.includes('linux')) return 'Linux';
+      if (platform.includes('iphone') || platform.includes('ipad')) return 'iOS';
+      if (platform.includes('android')) return 'Android';
+      return 'Unknown';
+    };
+
+    setOs(getOS());
+  }, []);
   const updateInvitation = useMutation({
     mutationFn: (option) => {
       return request({
@@ -54,7 +69,7 @@ const InviteCard = () => {
         url: `/showInvitationInfo/${invite}?uuid=${uuid}`,
       });
     },
-    refetchInterval : 500
+    refetchInterval: 500,
   });
 
   if (query.isLoading) {
@@ -77,6 +92,7 @@ const InviteCard = () => {
 
   return (
     <main className="h-screen w-full">
+      <h1>{os}</h1>
       <div className="w-full mb-2">
         <div class="flex flex-col md:flex-row gap-2">
           <div className="flex-row flex-1 h-screen">
@@ -262,18 +278,33 @@ const InviteCard = () => {
           </div>
         </div>
       </div>
-      <div className="flex items-center flex-wrap justify-center gap-10 mb-10 px-20">
+
+      <div className="flex items-center flex-col flex-wrap justify-center gap-10 mb-10 px-20">
         {+query.data.data.status === 1
           ? query.data.data.QRCode?.map((qr) => {
               return (
-                <img
-                  onClick={(e) => e.target.requestFullscreen()}
-                  src={`https://api.dev1.gomaplus.tech${qr.qr_code}`}
-                  className={"max-w-full"}
-                  style={{
-                    filter : `${qr.status ? 'blur(5px)' : 'none'}`,
-                  }}
-                />
+                <div key={qr.id}>
+                  <div className="flex items-center gap-10 p-4">
+                    <p className="text-center">
+                      عدد الاشخاص المتوقع حضورهم <br />
+                      {qr.number_of_people_without_decrease}
+                    </p>
+                    <p className="text-center">
+                      عدد الاشخاص الحاضرين <br />
+                      {qr.number_of_people}
+                    </p>
+                  </div>
+                  <div className="flex justify-center">
+                    <img
+                      onClick={(e) => e.target.requestFullscreen()}
+                      src={`https://api.dev1.gomaplus.tech${qr.qr_code}`}
+                      className={"max-w-full"}
+                      style={{
+                        filter: `${qr.status ? "blur(5px)" : "none"}`,
+                      }}
+                    />
+                  </div>
+                </div>
               );
             })
           : undefined}
