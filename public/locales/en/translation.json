@@ -1,0 +1,26 @@
+
+
+{
+    "apple_wallet_faild" : "The request failed, please try again or contact support.",
+    "apple_wallet_success" : "Successfully added to Apple Wallet.",
+    "error_loading_data" : "An error occurred while processing your request, please reload the page or contact support.",
+    "add_to_wallet" : "Add to {{platform}} Wallet",
+    "website_title" : "Welcome",
+    "event_name" : "Event Name",
+    "enviter_name" : "Inviter Name",
+    "milidi_date" : "Gregorian Date",
+    "hijri_date" : "Hijri Date",
+    "location" : "Maps",
+    "location_name" : "Location Link",
+    "city" : "City",
+    "area" : "Area",
+    "location_detail" : "Detailed Location",
+    "reject" : "Reject",
+    "accept" : "Accept",
+    "confirm" : "Confirm Action",
+    "cancellation" : "Cancel Action",
+    "estimation_number_of_people" : "Estimated Number of Attendees",
+    "number_of_people_remaining" : "Number of Remaining Attendees",
+    "apple" : "apple",
+    "google" : "google"
+}

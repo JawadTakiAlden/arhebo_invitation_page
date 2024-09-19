@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from "react";
-import InviteImage from "./Wedding Card 5  1.png";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { request } from "./request";
 import { HashLoader, PacmanLoader } from "react-spinners";
 import { useLocation, useParams } from "react-router";
 import { useSnackbar } from "notistack";
+import { useTranslation } from "react-i18next";
 const InviteCard = () => {
   const { invite } = useParams();
   const location = useLocation();
-  const [os , setOs] = useState('windows')
+  const [appleOs, setAppleOs] = useState("windows");
   const queryParams = new URLSearchParams(location.search);
   const [apolgizeText, setApolgizeText] = useState("");
+  const { t } = useTranslation();
   const [controller, setController] = useState({
     open: false,
     status: null,
@@ -19,18 +20,13 @@ const InviteCard = () => {
   const uuid = queryParams.get("uuid");
 
   useEffect(() => {
-    const getOS = () => {
-      const platform = navigator.platform.toLowerCase();
-      if (platform.includes('win')) return 'Windows';
-      if (platform.includes('mac')) return 'MacOS';
-      if (platform.includes('linux')) return 'Linux';
-      if (platform.includes('iphone') || platform.includes('ipad')) return 'iOS';
-      if (platform.includes('android')) return 'Android';
-      return 'Unknown';
-    };
-
-    setOs(getOS());
+    setAppleOs(
+      navigator.userAgent.toLowerCase().includes("mac") ||
+        navigator.userAgent.toLowerCase().includes("iphone") ||
+        navigator.userAgent.toLowerCase().includes("ipad")
+    );
   }, []);
+
   const updateInvitation = useMutation({
     mutationFn: (option) => {
       return request({
@@ -72,6 +68,27 @@ const InviteCard = () => {
     refetchInterval: 500,
   });
 
+  const addToAppleWallet = useMutation({
+    mutationKey: ["add-to-apple-wallet"],
+    mutationFn: (data) => {
+      return request({
+        url: "/createMember",
+        method: "post",
+        data,
+      });
+    },
+    onSuccess: () => {
+      enqueueSnackbar(t("apple_wallet_success"), {
+        variant: "success",
+      });
+    },
+    onError: () => {
+      enqueueSnackbar(t("apple_wallet_faild"), {
+        variant: "error",
+      });
+    },
+  });
+
   if (query.isLoading) {
     return (
       <div className="h-screen w-screen flex items-center justify-center">
@@ -83,8 +100,7 @@ const InviteCard = () => {
     return (
       <div className="h-screen w-screen flex items-center justify-center">
         <h1 className="capitalize text-[18px] text-center text-red-900 max-w-[500px]">
-          error happend while processing your request , please reload the page
-          or call support
+          {t("error_loading_data")}
         </h1>
       </div>
     );
@@ -92,7 +108,23 @@ const InviteCard = () => {
 
   return (
     <main className="h-screen w-full">
-      <h1>{os}</h1>
+      <header className="h-[60px] shadow-md px-8 flex justify-between items-center">
+        <h1 className="text-[22px] text-green-600">{t("website_title")}</h1>
+        <button
+          onClick={() => {
+            addToAppleWallet.mutate({
+              invitee_id: query.data.data.invitee_id,
+              invitation_id: query.data.data.invitation_id,
+            });
+          }}
+          disabled={addToAppleWallet.isPending}
+          className="px-4 py-1 bg-green-300 rounded-md focus:outline-none outline-none border-none cursor-pointer"
+        >
+          {t("add_to_wallet" , {
+            platform : appleOs ? t("apple") : t('google')
+          })}
+        </button>
+      </header>
       <div className="w-full mb-2">
         <div class="flex flex-col md:flex-row gap-2">
           <div className="flex-row flex-1 h-screen">
@@ -124,7 +156,7 @@ const InviteCard = () => {
                   )}
                 </p>
                 <p className="flex-row flex-1  px-6 py-2 bg-[#4AB3541A] text-center text-[20px] rounded-tr-[12px]">
-                  اسم المناسبة
+                  {t("event_name")}
                 </p>
               </div>
               <div className="flex items-center w-full">
@@ -134,7 +166,7 @@ const InviteCard = () => {
                   )}
                 </p>
                 <p className="flex-row flex-1  px-6 py-2 bg-[#4AB3541A] text-center text-[20px]">
-                  اسم الداعي
+                  {t("enviter_name")}
                 </p>
               </div>
               <div className="flex items-center w-full">
@@ -144,7 +176,7 @@ const InviteCard = () => {
                   )}
                 </p>
                 <p className="flex-row flex-1  px-6 py-2 bg-[#4AB3541A] text-center text-[20px] ">
-                  التاريخ الميلادي
+                  {t("milidi_date")}
                 </p>
               </div>
               <div className="flex items-center w-full">
@@ -154,20 +186,20 @@ const InviteCard = () => {
                   )}
                 </p>
                 <p className="flex-row flex-1  px-6 py-2 bg-[#4AB3541A] text-center text-[20px]">
-                  التاريخ الهجري
+                  {t("hijri_date")}
                 </p>
               </div>
               <div className="flex items-center w-full">
                 <p className="flex-row flex-1 text-center px-6 py-2 bg-[#F9F9F9] text-[20px]">
                   <a
                     href={query.data.data.location_link}
-                    className="py-1 px-3 bg-green-50 rounded-md"
+                    className="py-1 px-3 bg-green-200 rounded-xl"
                   >
-                    location
+                    {t("location")}
                   </a>
                 </p>
                 <p className="flex-row flex-1  px-6 py-2 bg-[#4AB3541A] text-center text-[20px] ">
-                  رابط الموقع
+                  {t("location_name")}
                 </p>
               </div>
               <div className="flex items-center w-full">
@@ -177,7 +209,7 @@ const InviteCard = () => {
                   )}
                 </p>
                 <p className="flex-row flex-1  px-6 py-2 bg-[#4AB3541A] text-center text-[20px]">
-                  المدينة
+                  {t("city")}
                 </p>
               </div>
               <div className="flex items-center w-full">
@@ -187,7 +219,7 @@ const InviteCard = () => {
                   )}
                 </p>
                 <p className="flex-row flex-1  px-6 py-2 bg-[#4AB3541A] text-center text-[20px] ">
-                  المنطقة
+                  {t("area")}
                 </p>
               </div>
               <div className="flex items-center w-full">
@@ -197,7 +229,7 @@ const InviteCard = () => {
                   )}
                 </p>
                 <p className="flex-row flex-1  px-6 py-2 bg-[#4AB3541A] text-center text-[20px] rounded-br-[12px]">
-                  الموقع
+                  {t("location_detail")}
                 </p>
               </div>
               <div className="flex flex-row w-full gap-4 mt-3">
@@ -216,7 +248,7 @@ const InviteCard = () => {
                   }
                   className="flex-row capitalize disabled:bg-red-200 text-white flex-1 px-7 py-3 w-full bg-[#F08D8E] rounded-lg"
                 >
-                  reject
+                  {t("reject")}
                 </button>
                 <button
                   disabled={
@@ -237,7 +269,7 @@ const InviteCard = () => {
                   {updateInvitation.isPending && (
                     <HashLoader size={20} color="#36d7b7" />
                   )}
-                  accept
+                  {t("accept")}
                 </button>
               </div>
               {controller.open && (
@@ -257,7 +289,7 @@ const InviteCard = () => {
                     {updateInvitation.isPending && (
                       <HashLoader color="#36d7b7" size={20} />
                     )}
-                    confirm
+                    {t("confirm")}
                   </button>
                   <button
                     disabled={updateInvitation.isPending}
@@ -270,7 +302,7 @@ const InviteCard = () => {
                     }}
                     className="flex-row capitalize disabled:bg-red-500 text-white flex-1 px-7 py-3 w-full bg-red-800 rounded-lg"
                   >
-                    cancle
+                    {t("cancellation")}
                   </button>
                 </div>
               )}
@@ -286,11 +318,11 @@ const InviteCard = () => {
                 <div key={qr.id}>
                   <div className="flex items-center gap-10 p-4">
                     <p className="text-center">
-                      عدد الاشخاص المتوقع حضورهم <br />
+                      {t("estimation_number_of_people")} <br />
                       {qr.number_of_people_without_decrease}
                     </p>
                     <p className="text-center">
-                      عدد الاشخاص الحاضرين <br />
+                      {t("number_of_people_remaining")} <br />
                       {qr.number_of_people}
                     </p>
                   </div>
