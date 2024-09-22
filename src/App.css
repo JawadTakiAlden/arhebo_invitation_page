@@ -3,6 +3,10 @@
 @tailwind utilities;
 
 
+*{
+    font-family: "Cairo", sans-serif;
+}
+
 .input-aplogy{
     border: 1px solid #888;
     padding: 10px 20px;

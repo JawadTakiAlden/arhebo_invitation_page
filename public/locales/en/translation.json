@@ -1,26 +1,45 @@
-
-
 {
-    "apple_wallet_faild" : "The request failed, please try again or contact support.",
-    "apple_wallet_success" : "Successfully added to Apple Wallet.",
-    "error_loading_data" : "An error occurred while processing your request, please reload the page or contact support.",
-    "add_to_wallet" : "Add to {{platform}} Wallet",
-    "website_title" : "Welcome",
-    "event_name" : "Event Name",
-    "enviter_name" : "Inviter Name",
-    "milidi_date" : "Gregorian Date",
-    "hijri_date" : "Hijri Date",
-    "location" : "Maps",
-    "location_name" : "Location Link",
-    "city" : "City",
-    "area" : "Area",
-    "location_detail" : "Detailed Location",
-    "reject" : "Reject",
-    "accept" : "Accept",
-    "confirm" : "Confirm Action",
-    "cancellation" : "Cancel Action",
-    "estimation_number_of_people" : "Estimated Number of Attendees",
-    "number_of_people_remaining" : "Number of Remaining Attendees",
-    "apple" : "apple",
-    "google" : "google"
+  "apple_wallet_faild": "The request failed, please try again or contact support.",
+  "apple_wallet_success": "Successfully added to Apple Wallet.",
+  "error_loading_data": "An error occurred while processing your request, please reload the page or contact support.",
+  "add_to_wallet": " {{platform}} Wallet",
+  "add_to": "Add to",
+  "website_title": "Welcome",
+  "event_name": "Event Name",
+  "enviter_name": "Inviter Name",
+  "milidi_date": "Gregorian Date",
+  "hijri_date": "Hijri Date",
+  "location": "Maps",
+  "location_name": "Location Link",
+  "city": "City",
+  "area": "Area",
+  "location_detail": "Detailed Location",
+  "reject": "Reject",
+  "accept": "Accept",
+  "confirm": "Send Message",
+  "cancellation": "Cancel Action",
+  "estimation_number_of_people": "Estimated Number of Attendees",
+  "number_of_people_remaining": "Number of Remaining Attendees",
+  "apple": "apple",
+  "google": "google",
+  "intigration_system": "you can add your invitaion card to your {{platform}} wallet",
+  "message": "Your message to the invitation sender",
+  "message_placeholder": "Write you'r message for inviter ...",
+  "event_info": "Invitaion Information",
+  "test_invitaion": "You are trying out a trial invitation. Thank you for using the Arhaba platform for electronic invitations We hope you like our platform",
+
+  "features_title": "Are you ready to explore the smart invitation experience with Erhbo?",
+  "invitationDetails": {
+    "title": "Instantly view your invitation details",
+    "description": "With the \"Erhbo\" app, you can easily view the invitation details, learn about the invitee, and check their personal QR code, as well as the number of guests accompanying them. All this with just a click!"
+  },
+  "addToWallet": {
+    "title": "Add the invitation to your digital wallet",
+    "description": "Don’t miss your important invitations! Now you can save the invitation directly to your Google or Apple wallet, so you’ll be fully prepared when attending the event."
+  },
+  "thankYouMessage": {
+    "title": "Personal Thank You Message",
+    "description": "Add a personal touch to the invitation! Write a thank you message directly to the person who invited you, leaving a great impression and enhancing your communication."
+  },
+  "footerText": "These features make \"Erhbo\" the perfect choice for managing your invitations and tracking attendance with ease and simplicity. Get the app now for a unique experience!"
 }
