@@ -18,6 +18,14 @@ const InviteCard = () => {
   const { t } = useTranslation();
   const { enqueueSnackbar } = useSnackbar();
   const uuid = queryParams.get("uuid");
+  const [appleOs, setAppleOs] = useState("windows");
+  useEffect(() => {
+    setAppleOs(
+      navigator.userAgent.toLowerCase().includes("mac") ||
+        navigator.userAgent.toLowerCase().includes("iphone") ||
+        navigator.userAgent.toLowerCase().includes("ipad")
+    );
+  }, []);
   const updateInvitation = useMutation({
     mutationFn: (option) => {
       return request({
@@ -28,6 +36,10 @@ const InviteCard = () => {
     },
     onSuccess: (data) => {
       query.refetch();
+      window.scrollTo({
+        top : window.scrollY + 200,
+        behavior : 'smooth'
+      })
       enqueueSnackbar(data.data.message, { variant: "success" });
     },
     onError: (error) => {
@@ -133,7 +145,7 @@ const InviteCard = () => {
                 />
               </div>
 
-              <div className="flex items-stretch w-full">
+              <div className="flex flex-row-reverse border-b-[1px] border-solid border-b-gray-100 items-stretch w-full">
                 <p className="flex-row flex-1 text-center px-6 py-2 bg-[#F9F9F9] text-[20px] ">
                   {query.data.data.event_name || (
                     <span className="text-red-400">...</span>
@@ -143,7 +155,7 @@ const InviteCard = () => {
                   {t("event_name")}
                 </p>
               </div>
-              <div className="flex items-stretch w-full">
+              <div className="flex flex-row-reverse border-b-[1px] border-solid border-b-gray-100 items-stretch w-full">
                 <p className="flex-row flex-1 text-center px-6 py-2 bg-[#F9F9F9] text-[20px] ">
                   {query.data.data.inviter || (
                     <span className="text-red-400">...</span>
@@ -153,7 +165,7 @@ const InviteCard = () => {
                   {t("enviter_name")}
                 </p>
               </div>
-              <div className="flex items-stretch w-full">
+              <div className="flex flex-row-reverse border-b-[1px] border-solid border-b-gray-100 items-stretch w-full">
                 <p className="flex-row flex-1 text-center px-6 py-2 bg-[#F9F9F9] text-[20px] ">
                   {query.data.data.miladi_date || (
                     <span className="text-red-400">...</span>
@@ -163,7 +175,7 @@ const InviteCard = () => {
                   {t("milidi_date")}
                 </p>
               </div>
-              <div className="flex items-stretch w-full">
+              <div className="flex flex-row-reverse border-b-[1px] border-solid border-b-gray-100 items-stretch w-full">
                 <p className="flex-row flex-1 text-center px-6 py-2 bg-[#F9F9F9] text-[20px] ">
                   {query.data.data.hijri_date || (
                     <span className="text-red-400">...</span>
@@ -173,12 +185,12 @@ const InviteCard = () => {
                   {t("hijri_date")}
                 </p>
               </div>
-              <div className="flex items-stretch w-full">
+              <div className="flex flex-row-reverse border-b-[1px] border-solid border-b-gray-100 items-stretch w-full">
                 <p className="flex-row flex-1 text-center px-6 py-2 bg-[#F9F9F9] text-[20px]">
                   <a
                     href={query.data.data.location_link}
                     target="_blank"
-                    className="py-1 px-3 bg-green-200 rounded-xl"
+                    className=" px-3 bg-green-200 rounded-xl"
                   >
                     {t("location")}
                   </a>
@@ -187,27 +199,27 @@ const InviteCard = () => {
                   {t("location_name")}
                 </p>
               </div>
-              <div className="flex items-stretch w-full">
+              <div className="flex flex-row-reverse border-b-[1px] border-solid border-b-gray-100 items-stretch w-full">
                 <p className="flex-row flex-1 text-center px-6 py-2 bg-[#F9F9F9] text-[20px] ">
                   {query.data.data.city || (
                     <span className="text-red-400">...</span>
                   )}
                 </p>
                 <p className="flex-row flex-1  px-6 py-2 bg-[#4AB3541A] text-center text-[20px]">
-                  {t("city")}
+                  {t("country")}
                 </p>
               </div>
-              <div className="flex items-stretch w-full">
+              <div className="flex flex-row-reverse border-b-[1px] border-solid border-b-gray-100 items-stretch w-full">
                 <p className="flex-row flex-1 text-center px-6 py-2 bg-[#F9F9F9] text-[20px]">
                   {query.data.data.region || (
                     <span className="text-red-400">...</span>
                   )}
                 </p>
                 <p className="flex-row flex-1  px-6 py-2 bg-[#4AB3541A] text-center text-[20px] ">
-                  {t("area")}
+                  {t("city")}
                 </p>
               </div>
-              <div className="flex items-stretch w-full">
+              <div className="flex flex-row-reverse border-b-[1px] border-solid border-b-gray-100 items-stretch w-full">
                 <p className="flex-row flex-1 text-center px-6 py-2 bg-[#F9F9F9] text-[20px]">
                   {query.data.data.location_name || (
                     <span className="text-red-400">...</span>
@@ -217,7 +229,7 @@ const InviteCard = () => {
                   {t("location_detail")}
                 </p>
               </div>
-              <div className="flex flex-row w-full gap-4 mt-10">
+              <div className="flex  flex-row w-full gap-4 mt-10">
                 <button
                   disabled={
                     updateInvitation.isPending ||
@@ -276,7 +288,7 @@ const InviteCard = () => {
           </div>
         </div>
       </div>
-      {+query.data.data.test_invitation && (
+      {!!+query.data.data.test_invitation && (
         <div
           style={{
             backgroundImage : "linear-gradient(to bottom , #fff , #e1e1e1)",
@@ -311,14 +323,14 @@ const InviteCard = () => {
           <p className="text-center mt-8 text-[23px] font-semibold text-green-500">
             {t("footerText")}
           </p>
-          <a style={{
+          <a href={appleOs ? "https://www.apple.com/store" : "https://play.google.com/store/games?hl=en"} style={{
             boxShadow : "5px 5px 0px 0px #fff"
           }} className="bg-black  flex items-center justify-center mt-4  rounded-full w-[200px] mx-auto py-2 px-5 text-white">
             download app now
           </a>
         </div>
       )}
-      {+query.data.data.status === 1 && <AddToWallet />}
+      {+query.data.data.status === 1 && <AddToWallet invitee_id={query?.data?.data?.invitee_id} invitation_id={query?.data?.data?.invitation_id} />}
       {+query.data.data.status === 1 && (
         <div className="bg-gray-100 rounded-md p-5 mb-3 w-[95%] mx-auto my-20">
           <div className="max-w-[600px] mx-auto">
