@@ -11,7 +11,7 @@ import { PacmanLoader } from "react-spinners";
 const AddToWallet = ({ invitee_id, invitation_id }) => {
   const [appleOs, setAppleOs] = useState("windows");
   const { t } = useTranslation();
-  const location = useLocation()
+  const location = useLocation();
   const { enqueueSnackbar } = useSnackbar();
   useEffect(() => {
     setAppleOs(
@@ -34,16 +34,30 @@ const AddToWallet = ({ invitee_id, invitation_id }) => {
       enqueueSnackbar(t("apple_wallet_success"), {
         variant: "success",
       });
-      if (appleOs) {
-        window.location.href =  "https://pub2.pskt.io/" + res?.data?.id
-      } else {
-        const a = document.createElement("a");
-        a.href = "https://pub2.pskt.io/" + res?.data?.id;
-        a.target = "_blank";
-        document.body.append(a);
-        a.style.display = "none";
-        a.click();
-      }
+
+      request({
+        url: "https://pub2.pskt.io/" + res?.data?.id,
+      }).then((re) => {
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(re.data, "text/html");
+        const anchorTags = doc.querySelectorAll("a");
+        const regex = /https:\/\/pub2\.pskt\.io\/[^\/]+\.(gpay|pkpass)$/;
+        const linkToWallet = Array.from(anchorTags).filter((at) => {
+          return regex.test(at.href);
+        })[0].href;
+        if (appleOs) {
+          window.location.href = linkToWallet;
+        } else {
+          // console.log('google')
+          // const a = document.createElement("a");
+          // a.href = linkToWallet;
+          // a.target = "_blank";
+          // document.body.append(a);
+          // a.style.display = "none";
+          // a.click();
+          window.location.href = linkToWallet;
+        }
+      });
     },
     onError: () => {
       enqueueSnackbar(t("apple_wallet_faild"), {
