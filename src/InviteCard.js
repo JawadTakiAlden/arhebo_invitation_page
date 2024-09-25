@@ -37,9 +37,9 @@ const InviteCard = () => {
     onSuccess: (data) => {
       query.refetch();
       window.scrollTo({
-        top : window.scrollY + 200,
-        behavior : 'smooth'
-      })
+        top: window.scrollY + 200,
+        behavior: "smooth",
+      });
       enqueueSnackbar(data.data.message, { variant: "success" });
     },
     onError: (error) => {
@@ -74,9 +74,13 @@ const InviteCard = () => {
     },
     // refetchInterval: 500,
   });
-  const [apolgizeText, setApolgizeText] = useState(
-    query?.data?.data?.accept_message || query?.data?.data?.apology_message
-  );
+
+  const [apolgizeText, setApolgizeText] = useState();
+  useEffect(() => {
+    setApolgizeText(
+      query?.data?.data?.apology_message || query?.data?.data?.accept_message
+    );
+  }, [query?.data?.data?.apology_message, query?.data?.data?.accept_message]);
 
   if (query.isLoading || contacts.isLoading) {
     return (
@@ -291,9 +295,9 @@ const InviteCard = () => {
       {!!+query.data.data.test_invitation && (
         <div
           style={{
-            backgroundImage : "linear-gradient(to bottom , #fff , #e1e1e1)",
-            borderRadius : '20px',
-            padding : '10px'
+            backgroundImage: "linear-gradient(to bottom , #fff , #e1e1e1)",
+            borderRadius: "20px",
+            padding: "10px",
           }}
         >
           <h2 className="text-[30px] max-w-[600px] mb-10 font-bold">
@@ -323,14 +327,27 @@ const InviteCard = () => {
           <p className="text-center mt-8 text-[23px] font-semibold text-green-500">
             {t("footerText")}
           </p>
-          <a href={appleOs ? "https://www.apple.com/store" : "https://play.google.com/store/games?hl=en"} style={{
-            boxShadow : "5px 5px 0px 0px #fff"
-          }} className="bg-black  flex items-center justify-center mt-4  rounded-full w-[200px] mx-auto py-2 px-5 text-white">
+          <a
+            href={
+              appleOs
+                ? "https://www.apple.com/store"
+                : "https://play.google.com/store/games?hl=en"
+            }
+            style={{
+              boxShadow: "5px 5px 0px 0px #fff",
+            }}
+            className="bg-black  flex items-center justify-center mt-4  rounded-full w-[200px] mx-auto py-2 px-5 text-white"
+          >
             download app now
           </a>
         </div>
       )}
-      {+query.data.data.status === 1 && <AddToWallet invitee_id={query?.data?.data?.invitee_id} invitation_id={query?.data?.data?.invitation_id} />}
+      {+query.data.data.status === 1 && (
+        <AddToWallet
+          invitee_id={query?.data?.data?.invitee_id}
+          invitation_id={query?.data?.data?.invitation_id}
+        />
+      )}
       {+query.data.data.status === 1 && (
         <div className="bg-gray-100 rounded-md p-5 mb-3 w-[95%] mx-auto my-20">
           <div className="max-w-[600px] mx-auto">
