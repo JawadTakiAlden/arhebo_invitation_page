@@ -34,6 +34,7 @@ const AddToWallet = ({ invitee_id, invitation_id }) => {
       const a = document.createElement("a");
       a.href = "https://pub2.pskt.io/" + res?.data?.id;
       a.target = "_blank";
+      a.style.display = 'none'
       a.click();
       enqueueSnackbar(t("apple_wallet_success"), {
         variant: "success",
