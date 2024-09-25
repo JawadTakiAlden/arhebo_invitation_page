@@ -3,15 +3,15 @@ import React, { useEffect, useState } from "react";
 import { request } from "./request";
 import { useTranslation } from "react-i18next";
 import { useSnackbar } from "notistack";
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import applewallet from "./apple-wallete.png";
 import googleWallet from "./google-wallet.png";
 import { PacmanLoader } from "react-spinners";
 
 const AddToWallet = ({ invitee_id, invitation_id }) => {
   const [appleOs, setAppleOs] = useState("windows");
-  const navigate = useNavigate();
   const { t } = useTranslation();
+  const location = useLocation()
   const { enqueueSnackbar } = useSnackbar();
   useEffect(() => {
     setAppleOs(
@@ -31,15 +31,19 @@ const AddToWallet = ({ invitee_id, invitation_id }) => {
     },
 
     onSuccess: (res) => {
-      const a = document.createElement("a");
-      a.href = "https://pub2.pskt.io/" + res?.data?.id;
-      a.target = "_blank";
-      a.style.display = 'none'
-      document.append(a)
-      a.click();
       enqueueSnackbar(t("apple_wallet_success"), {
         variant: "success",
       });
+      if (appleOs) {
+        window.location.href =  "https://pub2.pskt.io/" + res?.data?.id
+      } else {
+        const a = document.createElement("a");
+        a.href = "https://pub2.pskt.io/" + res?.data?.id;
+        a.target = "_blank";
+        document.body.append(a);
+        a.style.display = "none";
+        a.click();
+      }
     },
     onError: () => {
       enqueueSnackbar(t("apple_wallet_faild"), {
