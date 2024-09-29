@@ -171,7 +171,7 @@ const InviteCard = () => {
               </div>
               <div className="flex flex-row-reverse border-b-[1px] border-solid border-b-gray-100 items-stretch w-full">
                 <p className="flex-row flex-1 text-center px-6 py-2 bg-[#F9F9F9] text-[20px] ">
-                  {query.data.data.miladi_date || (
+                  {query.data.data.miladi_date.replaceAll("-", "/") || (
                     <span className="text-red-400">...</span>
                   )}
                 </p>
@@ -181,7 +181,7 @@ const InviteCard = () => {
               </div>
               <div className="flex flex-row-reverse border-b-[1px] border-solid border-b-gray-100 items-stretch w-full">
                 <p className="flex-row flex-1 text-center px-6 py-2 bg-[#F9F9F9] text-[20px] ">
-                  {query.data.data.hijri_date || (
+                  {query.data.data.hijri_date.replaceAll("-", "/") || (
                     <span className="text-red-400">...</span>
                   )}
                 </p>
@@ -190,13 +190,21 @@ const InviteCard = () => {
                 </p>
               </div>
               <div className="flex flex-row-reverse border-b-[1px] border-solid border-b-gray-100 items-stretch w-full">
-                <p className="flex-row flex-1 text-center px-6 py-2 bg-[#F9F9F9] text-[20px]">
-                  <a
+                <p className="flex flex-row flex-1 text-center max-w-[50%] px-6 py-2 bg-[#F9F9F9] text-[20px]">
+                  {/* <a
                     href={query.data.data.location_link}
                     target="_blank"
                     className=" px-3 bg-green-200 rounded-xl"
                   >
                     {t("location")}
+                  </a> */}
+                  <a
+                    dir="ltr"
+                    href={query.data.data.location_link}
+                    target="_blank"
+                    className="max-w-[300px] whitespace-nowrap underline underline-offset-4 text-green-500 overflow-hidden text-ellipsis"
+                  >
+                    {query.data.data.location_link}
                   </a>
                 </p>
                 <p className="flex-row flex-1  px-6 py-2 bg-[#4AB3541A] text-center text-[20px] ">
@@ -248,7 +256,13 @@ const InviteCard = () => {
                   }}
                   className="flex-row capitalize flex items-center gap-3 justify-center disabled:bg-red-200 text-white flex-1 px-7 py-3 w-full bg-[#F08D8E] rounded-lg"
                 >
-                  {t("reject")}
+                  <p className="">
+                    <span className="font-semibold text-[22px]">
+                      {t("reject")}
+                    </span>{" "}
+                    {t("invitaion")}
+                  </p>
+
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     height="24px"
@@ -276,7 +290,12 @@ const InviteCard = () => {
                   {updateInvitation.isPending && (
                     <HashLoader size={20} color="#36d7b7" />
                   )}
-                  {t("accept")}
+                  <p className="">
+                    <span className="font-semibold text-[22px]">
+                      {t("accept")}
+                    </span>{" "}
+                    {t("invitaion")}
+                  </p>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     height="24px"
@@ -361,6 +380,9 @@ const InviteCard = () => {
               >
                 <path d="M880-80 720-240H320q-33 0-56.5-23.5T240-320v-40h440q33 0 56.5-23.5T760-440v-280h40q33 0 56.5 23.5T880-640v560ZM160-473l47-47h393v-280H160v327ZM80-280v-520q0-33 23.5-56.5T160-880h440q33 0 56.5 23.5T680-800v280q0 33-23.5 56.5T600-440H240L80-280Zm80-240v-280 280Z" />
               </svg>
+              <span className="text-green-500 font-semibold text-[22px]">
+                {t("contactWith")}
+              </span>
               {t("message")}
             </p>
             <textarea
@@ -386,7 +408,7 @@ const InviteCard = () => {
                       }),
                 })
               }
-              className="flex-row mt-3 capitalize gap-3 flex items-center  justify-center mb-2 text-white disabled:bg-green-100 disabled:cursor-not-allowed flex-1 px-7 py-3 w-full bg-green-400 rounded-lg"
+              className="flex-row mt-3 capitalize gap-3 flex items-center transition-all duration-300  justify-center mb-2 text-white disabled:bg-gray-400 disabled:cursor-not-allowed flex-1 px-7 py-3 w-full bg-green-400 rounded-lg"
             >
               {updateInvitation.isPending && (
                 <HashLoader color="#36d7b7" size={20} />
