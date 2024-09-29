@@ -1,6 +1,6 @@
 {
     "apple_wallet_faild" : "فشل الأمر، حاول مرة أخرى أو اتصل بالدعم.",
-    "apple_wallet_success" : "تمت الإضافة إلى محفظة Apple بنجاح.",
+    "apple_wallet_success" : "تمت الإضافة إلى المحفظة بنجاح.",
     "error_loading_data" : "حدث خطأ أثناء معالجة طلبك، يرجى إعادة تحميل الصفحة أو الاتصال بالدعم.",
     "add_to_wallet" : "اضافة الى محفظة {{platform}}",
     "website_title" : "ارحبو",

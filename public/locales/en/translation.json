@@ -1,6 +1,6 @@
 {
   "apple_wallet_faild": "The request failed, please try again or contact support.",
-  "apple_wallet_success": "Successfully added to Apple Wallet.",
+  "apple_wallet_success": "Successfully added to Wallet.",
   "error_loading_data": "An error occurred while processing your request, please reload the page or contact support.",
   "add_to_wallet": " {{platform}} Wallet",
   "add_to": "Add to",

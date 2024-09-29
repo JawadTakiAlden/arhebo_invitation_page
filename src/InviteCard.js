@@ -15,7 +15,7 @@ const InviteCard = () => {
   const { invite } = useParams();
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { enqueueSnackbar } = useSnackbar();
   const uuid = queryParams.get("uuid");
   const [appleOs, setAppleOs] = useState("windows");
@@ -169,6 +169,18 @@ const InviteCard = () => {
                   {t("enviter_name")}
                 </p>
               </div>
+              {query.data.data.invitationInput.map((dynmicInput) => (
+                <div className="flex flex-row-reverse border-b-[1px] border-solid border-b-gray-100 items-stretch w-full">
+                  <p className="flex-row flex-1 text-center px-6 py-2 bg-[#F9F9F9] text-[20px]">
+                    {dynmicInput.value}
+                  </p>
+                  <p className="flex-row flex-1  px-6 py-2 bg-[#4AB3541A] text-center text-[20px]">
+                    {i18n.language === "en"
+                      ? dynmicInput.name
+                      : dynmicInput.name_ar}
+                  </p>
+                </div>
+              ))}
               <div className="flex flex-row-reverse border-b-[1px] border-solid border-b-gray-100 items-stretch w-full">
                 <p className="flex-row flex-1 text-center px-6 py-2 bg-[#F9F9F9] text-[20px] ">
                   {query.data.data.miladi_date.replaceAll("-", "/") || (
@@ -241,6 +253,7 @@ const InviteCard = () => {
                   {t("location_detail")}
                 </p>
               </div>
+
               <div className="flex  flex-row w-full gap-4 mt-10">
                 <button
                   disabled={
