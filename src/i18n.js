@@ -9,7 +9,7 @@ i18n
   .use(initReactI18next)
   .init({
     fallbackLng: 'ar',
-    lng : "en",
+    lng : "ar",
   });
 
 export default i18n;
