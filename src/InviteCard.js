@@ -463,7 +463,7 @@ const InviteCard = () => {
                   <div className="flex justify-center">
                     <img
                       onClick={(e) => e.target.requestFullscreen()}
-                      src={`https://api.dev1.gomaplus.tech${qr.qr_code}`}
+                      src={`https://api.ar7ebo.gomaplus.tech${qr.qr_code}`}
                       className={"max-w-full"}
                       style={{
                         filter: `${qr.status ? "blur(5px)" : "none"}`,
