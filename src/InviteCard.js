@@ -380,7 +380,7 @@ const InviteCard = () => {
           invitation_id={query?.data?.data?.invitation_id}
         />
       )}
-      {+query.data.data.status === 1 && (
+      {(+query.data.data.status === 1 || +query.data.data.status === 3 ) && (
         <div className="bg-gray-100 rounded-md p-5 mb-3 w-[95%] mx-auto my-20">
           <div className="max-w-[600px] mx-auto">
             <p className="mb-4 flex items-center gap-3">
